@@ -42,21 +42,20 @@ unsigned int HashTable::hashFunction(int key)
             //check if we are back at our original hash and break if we did
             if(i == hash)
             {
+                //The list is already full
                 break;
             }  
-            numOfcolision++;
         }
     }  
 }
 
 void HashTable::printTable()
 {
-    node * currNode = table[0];
-    while(currNode->next)
+    for(int i = 0; i < tableSize; i++)
     {
-        cout << currNode->key << " ";
+        cout << table[0] << " ";
     }
-    cout << endl;
+    cout << endl;   
 }
 
 node* HashTable::searchItem(int key)
@@ -66,12 +65,7 @@ node* HashTable::searchItem(int key)
         if (table[i]->key = key)
         {
             return table[i];
-        }
-        else
-        {
-            //check the chain
-        }
-        
+        } 
     }   
     return NULL;
 }
