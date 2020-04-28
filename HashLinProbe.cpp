@@ -9,7 +9,8 @@ HashTable::HashTable(int bsize)
 
 bool HashTable::insertItem(int key)
 {
-    table[hashFunction(key)]->key = key;
+    node *newNode = createNode(key, NULL);
+    table[hashFunction(key)] = newNode;
 }
 
 unsigned int HashTable::hashFunction(int key)
@@ -25,12 +26,16 @@ unsigned int HashTable::hashFunction(int key)
     //otherwise commense the collision resloution
     else
     {
-        numOfcolision++;
-        //First try a linear probe starting from the collision point
+        //if the hash value is the last index we will increment back one for our loop
+        if(hash == tableSize - 1)
+        {
+            hash = hash - 1;
+        }
+        //linear probe starting from the collision point
         for(int i = hash + 1; i < tableSize; i++)
         {
             //check for open spot
-            if(table[i] == 0)
+            if(table[i] == NULL)
             {
                 return i;
             }
