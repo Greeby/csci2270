@@ -5,16 +5,22 @@ using namespace std;
 HashTable::HashTable(int bsize)
 {
     tableSize = bsize;
+    for(int i = 0; i < tableSize; i++)
+    {
+        table[i] = NULL;
+    }
 }
 
 bool HashTable::insertItem(int key)
 {
     int hashIndex = hashFunction(key);
-    while (table[hashIndex] != NULL)
+    while (table[hashIndex] != NULL && numOfcolision < tableSize)
     {
+        numOfcolision++;
         hashIndex = (hashIndex + 1) % tableSize;
     }
     table[hashIndex] = createNode(key, NULL);
+    numOfcolision = 0;
     return true;
 }
 
@@ -29,7 +35,13 @@ void HashTable::printTable()
 {
     for(int i = 0; i < tableSize; i++)
     {
-        cout << table[0]->key << " ";
+        if(table[i] != NULL)
+        cout << table[i]->key << " ";
+        else
+        {
+            cout<< "Table[" << i << "] is NULL ";
+        }
+        
     }
     cout << endl;   
 }
