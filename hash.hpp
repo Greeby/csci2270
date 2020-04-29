@@ -12,6 +12,7 @@ struct node
     struct node* next;
 };
 
+
 class HashTable
 {
     int tableSize;  // No. of buckets (linked lists)
@@ -19,6 +20,9 @@ class HashTable
     // Pointer to an array containing buckets
     node* *table;
     int numOfcolision =0;
+    int totalInsertCollisions = 0;
+    int totalSearchCollisions = 0;
+    
     node* createNode(int key, node* next){
         node* newnode = new node();
         newnode->key = key;
@@ -36,6 +40,8 @@ public:
 
     void printTable();
     int getNumOfCollision();
+    int getTotalInsertCol();
+    int getTotalSearchCol();
 
     node* searchItem(int key);
 };
