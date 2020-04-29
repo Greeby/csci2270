@@ -1,4 +1,4 @@
-#include "HashTest.hpp"
+#include "hash.hpp"
 #include<iostream>
 using namespace std;
 

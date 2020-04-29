@@ -1,5 +1,5 @@
 #include<iostream>
-#include "Hash.hpp";
+#include "Hash.hpp"
 using namespace std;
 
 HashTable::HashTable(int bsize)
@@ -22,6 +22,7 @@ unsigned int HashTable::hashFunction(int key)
 {
     //calculate the hash, check for collision, perform collision resolution if needed
     int hash = key % tableSize;
+    return hash;
 }
 
 void HashTable::printTable()
