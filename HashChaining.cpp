@@ -5,25 +5,30 @@ using namespace std;
 HashTable::HashTable(int bsize)
 {
     tableSize = bsize;
-}
+    table = new node*[tableSize];
 
+}
 bool HashTable::insertItem(int key)
 {
     node* currNode = table[hashFunction(key)];
-    while(currNode->next != NULL)
-    {
-        currNode = currNode->next;
+    if(currNode == NULL){
+        currNode = createNode(key, NULL);
     }
-    currNode->next = createNode(key, NULL);
+    else{
+        while(currNode->next != NULL)
+        {
+            currNode = currNode->next;
+        }
+        currNode->next = createNode(key, NULL);
+    }
+    
     return true;
 }
 
 unsigned int HashTable::hashFunction(int key)
 {
     //calculate the hash, check for collision, perform collision resolution if needed
-    int hash = key % tableSize;
-
-    return hash;
+    return (key % tableSize);
 }
 
 void HashTable::printTable()
@@ -31,7 +36,7 @@ void HashTable::printTable()
     node* currNode;
     for(int i = 0; i < tableSize; i++)
     {
-        cout << table[0] << " ";
+        cout << table[i] << " ";
         //print the list at index
         currNode = table[i];
         while(currNode)
@@ -62,4 +67,3 @@ node* HashTable::searchItem(int key)
         }   
     return NULL;
 }
-
