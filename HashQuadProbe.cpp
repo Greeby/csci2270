@@ -1,5 +1,5 @@
 #include<iostream>
-#include "Hash.hpp";
+#include "Hash.hpp"
 using namespace std;
 
 HashTable::HashTable(int bsize)
@@ -13,7 +13,7 @@ bool HashTable::insertItem(int key)
     while(table[hashIndex] != NULL)
     {
         numOfcolision++;
-        hashIndex = (key + numOfcolision^2) % tableSize;
+        hashIndex = (hashIndex + numOfcolision^2) % tableSize;
     }
     table[hashIndex] = createNode(key, NULL);
     return true;
